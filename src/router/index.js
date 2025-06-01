@@ -5,6 +5,7 @@ import Dashboard from '../views/DashboardView.vue'
 import Anuncios from '../views/AnunciosView.vue'
 import Produtos from '../views/ProdutosView.vue'
 import PerguntasResposta from '../views/PerguntasAResponderView.vue'
+import Registro from '../views/RegisterView.vue'
 
 export const routes = {
   login: '/login',
@@ -12,7 +13,8 @@ export const routes = {
   anuncio: '/anuncio',
   produtos: '/produtos',
   produto: '/produto',
-  perguntas: '/perguntas-a-responder'
+  perguntas: '/perguntas-a-responder',
+  register: '/registro'
 };
 
 const router = createRouter({
@@ -22,6 +24,12 @@ const router = createRouter({
       path: routes.login,
       name: 'Login',
       component: Login
+    },
+    {
+      path: routes.register,
+      name: 'Registro',
+      component: Registro
+
     },
     {
       path: routes.dashboard,

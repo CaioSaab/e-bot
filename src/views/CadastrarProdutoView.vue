@@ -1,8 +1,8 @@
 <template>
   <div class="p-6">
-    <h1 class="text-2xl font-bold mb-4 text-white">Cadastrar Produto - Ebot</h1>
+    <h1 class="text-2xl font-bold mb-4 text-white">Cadastro de Produtos - Ebot</h1>
 
-    <div class="bg-white text-black p-6 rounded-lg shadow-md max-w-xl mx-auto">
+    <div class="bg-white p-6 rounded-lg shadow-md max-w-xl mx-auto">
       <div class="grid grid-cols-1 gap-4">
         <input
           v-model="produto.nome"
@@ -11,21 +11,21 @@
           class="border rounded px-3 py-2"
         />
         <input
-          v-model.number="produto.preco"
+          v-model="produto.preco"
           type="number"
           placeholder="Preço"
-          class="border rounded px-3 py-2"
-        />
-        <input
-          v-model="produto.descricao"
-          type="text"
-          placeholder="Descrição"
           class="border rounded px-3 py-2"
         />
         <input
           v-model="produto.imagem"
           type="text"
           placeholder="URL da Imagem"
+          class="border rounded px-3 py-2"
+        />
+        <input
+          v-model="produto.descricao"
+          type="text"
+          placeholder="Descrição"
           class="border rounded px-3 py-2"
         />
       </div>
@@ -42,44 +42,48 @@
 
 <script setup>
 import { ref } from 'vue'
-import api from '@/api'
 import router from '@/router'
 
 const produto = ref({
   nome: '',
-  preco: null,
-  descricao: '',
-  imagem: ''
- 
+  preco: '',
+  imagem: '',
+  descricao: ''
 })
 
-async function cadastrarProduto() {
+function cadastrarProduto() {
   if (
     !produto.value.nome ||
-    produto.value.preco === null ||
-    !produto.value.descricao ||
-    !produto.value.imagem 
-    
+    !produto.value.preco ||
+    !produto.value.imagem ||
+    !produto.value.descricao
   ) {
     alert('Preencha todos os campos!')
     return
   }
 
-  try {
-    await api.post('/produtos', produto.value)
-    alert('Produto cadastrado com sucesso!')
+  const produtos = JSON.parse(localStorage.getItem('produtos')) || []
 
-    produto.value = {
-      nome: '',
-      preco: null,
-      descricao: '',
-      imagem: ''
-    }
+  const novoProduto = {
+    ...produto.value,
+    id: Date.now()
+  }
 
-    router.push('/produtos')
-  } catch (error) {
-    alert('Erro ao cadastrar produto')
-    console.error(error)
-  }
+  produtos.push(novoProduto)
+
+  localStorage.setItem('produtos', JSON.stringify(produtos))
+
+  alert('Produto cadastrado com sucesso!')
+
+  // Limpar formulário
+  produto.value = {
+    nome: '',
+    preco: '',
+    imagem: '',
+    descricao: ''
+  }
+
+  // Redireciona para página de produtos
+  router.push('/produtos')
 }
 </script>

@@ -6,7 +6,7 @@
     </div>
     <nav class="space-y-2 flex-1">
       <router-link :to="routes.dashboard" class="block px-4 py-2 rounded hover:bg-gray-700">Dashboard</router-link>
-      <router-link :to="routes.anuncios" class="block px-4 py-2 rounded hover:bg-gray-700">Anúncios</router-link>
+      <router-link :to="routes.anuncio" class="block px-4 py-2 rounded hover:bg-gray-700">Anúncios</router-link>
       <router-link :to="routes.produtos" class="block px-4 py-2 rounded hover:bg-gray-700">Produtos</router-link>
       <router-link :to="routes.perguntas" class="block px-4 py-2 rounded hover:bg-gray-700">Perguntas a Responder</router-link>
     </nav>
