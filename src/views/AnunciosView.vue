@@ -1,3 +1,39 @@
+<script setup>
+import { ref, onMounted } from 'vue'
+import api from '@/api'
+
+const produtos = ref([])
+const perguntas = ref({})
+
+const backendURL = import.meta.env.VITE_BACKEND_URL
+
+async function carregarProdutos() {
+  try {
+    const response = await api.get('/produtos')
+    produtos.value = response.data
+    console.log(response.data)
+  } catch (error) {
+    alert('Erro ao carregar produtos')
+    console.error(error)
+  }
+}
+
+function enviarPergunta(produtoId) {
+  const pergunta = perguntas.value[produtoId]
+  if (!pergunta) {
+    alert('Digite uma pergunta antes de enviar.')
+    return
+  }
+
+  alert(`Pergunta sobre o produto "${produtoId}": ${pergunta}`)
+  perguntas.value[produtoId] = ''
+}
+
+onMounted(() => {
+  carregarProdutos()
+})
+</script>
+
 <template>
   <div class="p-6">
     <h1 class="text-2xl font-bold mb-4 text-white">Anúncios - Ebot</h1>
@@ -13,7 +49,7 @@
         class="bg-white p-4 rounded-lg shadow-md"
       >
         <img
-          :src="produto.imagem"
+          :src="produto.imageURL"
           :alt="produto.nome"
           class="w-full h-40 object-cover rounded mb-4"
         />
@@ -43,36 +79,3 @@
     </div>
   </div>
 </template>
-
-<script setup>
-import { ref, onMounted } from 'vue'
-import api from '@/api'
-
-const produtos = ref([])
-const perguntas = ref({})
-
-async function carregarProdutos() {
-  try {
-    const response = await api.get('/produtos')
-    produtos.value = response.data
-  } catch (error) {
-    alert('Erro ao carregar produtos')
-    console.error(error)
-  }
-}
-
-function enviarPergunta(produtoId) {
-  const pergunta = perguntas.value[produtoId]
-  if (!pergunta) {
-    alert('Digite uma pergunta antes de enviar.')
-    return
-  }
-
-  alert('Pergunta sobre o produto "${produtoId}": ${pergunta}')
-  perguntas.value[produtoId] = ''
-}
-
-onMounted(() => {
-  carregarProdutos()
-})
-</script>
