@@ -1,29 +1,47 @@
-# vite-ebot
+Devs Richard Reiel. RA: 2001354
+Caio Saab. RA: 1988558
+Felipe Braz. RA: 2003682
+Eduardo Roberto. RA: 1989600
 
-This template should help get you started developing with Vue 3 in Vite.
+Ebot - Sistema de Anúncios com Perguntas e Respostas
+====================================================
 
-## Recommended IDE Setup
+Este projeto é um sistema completo para gerenciamento de produtos/anúncios, onde usuários podem cadastrar produtos, visualizar anúncios e interagir com perguntas e respostas.
 
-[VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur).
+Tecnologias Utilizadas
+----------------------
 
-## Customize configuration
+Frontend:
+- Vue.js 3 (Composition API)
+- Tailwind CSS
+- Vite
+- Axios
 
-See [Vite Configuration Reference](https://vite.dev/config/).
+Backend:
+- ASP.NET Core 7
+- Entity Framework Core
+- Banco de dados relacional (ex: SQL Server)
 
-## Project Setup
+Funcionalidades
+---------------
+- Cadastro de produtos
+- Upload e exibição de imagens dos produtos
+- Visualização pública de anúncios
+- Sistema de perguntas por produto
+- Área para responder perguntas pendentes
+- Autenticação JWT
+- API REST protegida com [Authorize]
 
-```sh
-npm install
-```
+Como Rodar o Projeto Localmente
+-------------------------------
 
-### Compile and Hot-Reload for Development
+Pré-requisitos:
+- .NET 7 SDK
+- Node.js
+- SQL Server
 
-```sh
-npm run dev
-```
-
-### Compile and Minify for Production
-
-```sh
-npm run build
-```
+Backend (ASP.NET Core):
+    cd backend
+    dotnet restore
+    dotnet ef database update
+    dotnet run
