@@ -62,7 +62,7 @@ async function Register() {
   console.log({ registerParameters }, 'Parâmetros do cadastro')
 
   try {
-    await api.post('/auth/register', registerParameters)
+    await api.post('/contas', registerParameters)
     alert('Cadastro realizado com sucesso!')
     router.replace(routes.login)
   } catch (error) {
