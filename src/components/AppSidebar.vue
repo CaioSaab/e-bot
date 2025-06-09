@@ -11,10 +11,7 @@
       <router-link :to="routes.perguntas" class="block px-4 py-2 rounded hover:bg-gray-700">Perguntas a Responder</router-link>
     </nav>
 
-    <button 
-      @click="logout" 
-      class="mt-auto bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded"
-    >
+    <button @click="logout" class="mt-auto bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded">
       Sair
     </button>
   </aside>

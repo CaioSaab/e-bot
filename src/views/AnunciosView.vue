@@ -1,60 +1,67 @@
 <template>
-  <div class="p-6">
-    <h1 class="text-2xl font-bold mb-4 text-white">Anúncios - Ebot</h1>
+  <div class="p-6 max-w-7xl mx-auto text-white">
+    <!-- Título -->
+    <h1 class="text-3xl font-bold mb-6">🛍️ Anúncios - Ebot</h1>
 
     <!-- Campo de busca -->
     <input
       v-model="filtroNome"
       type="text"
       placeholder="Buscar produto pelo nome..."
-      class="mb-6 w-full px-4 py-2 rounded border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-600"
+      class="mb-8 w-full px-4 py-3 rounded-lg border border-gray-600 bg-gray-800 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500"
     />
 
-    <div v-if="produtosFiltrados.length === 0" class="text-white">
+    <!-- Sem resultados -->
+    <div v-if="produtosFiltrados.length === 0" class="text-gray-400 text-center">
       Nenhum produto encontrado.
     </div>
 
+    <!-- Grid de produtos -->
     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
       <div
         v-for="produto in produtosPagina"
         :key="produto.id"
-        class="bg-gray-700 p-4 rounded-lg shadow-md cursor-pointer"
+        class="bg-gray-700 p-5 rounded-xl shadow-md hover:shadow-xl transition-all cursor-pointer group"
         @click="irParaDetalhes(produto.id)"
       >
-        <img
-          :src="produto.imageURL"
-          :alt="produto.nome"
-          class="w-full h-40 object-cover rounded mb-4"
-        />
-        <h2 class="text-lg font-bold mb-1">{{ produto.nome }}</h2>
-        <p class="text-gray-600 mb-1">{{ produto.descricao }}</p>
-        <p class="font-bold text-blue-600 mb-4">R$ {{ produto.preco }}</p>
+        <div class="w-full aspect-square overflow-hidden rounded-lg mb-4">
+          <img
+            :src="produto.imageURL"
+            :alt="produto.nome"
+            class="w-full h-full object-cover transform group-hover:scale-105 transition"
+          />
+        </div>
+
+        <h2 class="text-xl font-semibold mb-1">{{ produto.nome }}</h2>
+        <p class="text-blue-400 font-bold text-lg">R$ {{ produto.preco.toFixed(2) }}</p>
       </div>
     </div>
 
-    <div class="flex justify-center mt-6 gap-2">
+    <!-- Paginação -->
+    <div class="flex justify-center mt-10 gap-4">
       <button
         @click="paginaAtual--"
         :disabled="paginaAtual === 1"
-        class="px-4 py-2 bg-blue-600 text-white rounded disabled:opacity-50"
+        class="px-5 py-2 bg-blue-600 text-white rounded-lg disabled:opacity-50 hover:bg-blue-700 transition"
       >
-        Anterior
+        ← Anterior
       </button>
 
-      <span class="text-white px-4 py-2">
+      <span class="px-4 py-2 text-white font-medium">
         Página {{ paginaAtual }} de {{ totalPaginas }}
       </span>
 
       <button
         @click="paginaAtual++"
         :disabled="paginaAtual === totalPaginas"
-        class="px-4 py-2 bg-blue-600 text-white rounded disabled:opacity-50"
+        class="px-5 py-2 bg-blue-600 text-white rounded-lg disabled:opacity-50 hover:bg-blue-700 transition"
       >
-        Próxima
+        Próxima →
       </button>
     </div>
   </div>
 </template>
+
 
 <script setup>
 import { ref, computed, watch, onMounted } from 'vue'
@@ -78,7 +85,6 @@ async function carregarProdutos() {
   }
 }
 
-// Filtra produtos pelo nome (case insensitive)
 const produtosFiltrados = computed(() => {
   if (!filtroNome.value) return produtos.value
 
@@ -87,19 +93,16 @@ const produtosFiltrados = computed(() => {
   )
 })
 
-// Atualiza o total de páginas com base nos produtos filtrados
 const totalPaginas = computed(() =>
   Math.ceil(produtosFiltrados.value.length / limitePorPagina)
 )
 
-// Calcula os produtos da página atual com base no filtro
 const produtosPagina = computed(() => {
   const start = (paginaAtual.value - 1) * limitePorPagina
   const end = paginaAtual.value * limitePorPagina
   return produtosFiltrados.value.slice(start, end)
 })
 
-// Se o filtro mudar, volta para a primeira página
 watch(filtroNome, () => {
   paginaAtual.value = 1
 })

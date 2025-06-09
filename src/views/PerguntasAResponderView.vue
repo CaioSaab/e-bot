@@ -1,32 +1,37 @@
 <template>
-  <div class="p-6 text-white">
-    <h1 class="text-2xl font-bold mb-4">Perguntas a Responder - Ebot</h1>
+  <div class="p-4 max-w-6xl mx-auto text-white">
+    <h1 class="text-xl sm:text-2xl font-bold mb-4 text-center">📩 Perguntas a Responder - Ebot</h1>
 
-    <div v-if="produtosComPerguntas.length === 0">Nenhuma pergunta pendente encontrada.</div>
+    <div v-if="produtosComPerguntas.length === 0" class="text-center text-gray-400">
+      Nenhuma pergunta pendente encontrada.
+    </div>
 
-    <div v-for="produto in produtosComPerguntas" :key="produto.id" class="mb-6 p-4 bg-gray-800 rounded shadow">
-      <h2 class="text-xl font-bold mb-2">{{ produto.nome }}</h2>
-      <img :src="produto.imageURL" alt="Produto" class="w-full h-40 object-cover rounded mb-2"/>
-      <p class="text-sm mb-4">{{ produto.descricao }}</p>
+    <div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+      <div
+        v-for="produto in produtosComPerguntas" :key="produto.id" class="p-3 bg-gray-800 rounded shadow-md">
+        <h2 class="text-base font-bold mb-2">{{ produto.nome }}</h2>
 
-      <div v-if="produto.perguntas.length">
-        <h3 class="text-lg font-semibold mb-2">Perguntas Pendentes:</h3>
-        <div v-for="pergunta in produto.perguntas" :key="pergunta.id" class="bg-gray-700 p-3 rounded mb-3">
-          <p class="mb-2"><strong>Pergunta:</strong> {{ pergunta.conteudo }}</p>
-          <input
-            v-model="respostas[pergunta.id]"
-            type="text"
-            placeholder="Digite sua resposta..."
-            class="w-full px-3 py-2 border rounded bg-gray-200 text-black mb-2"
-          />
-          <button @click="responder(pergunta.id)" class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-1 rounded">
-            Responder
-          </button>
+        <div class="w-full aspect-[4/3] overflow-hidden rounded mb-2">
+          <img :src="produto.imageURL" alt="Produto" class="w-full h-full object-cover"/>
+        </div>
+
+        <div v-if="produto.perguntas.length">
+          <h3 class="text-sm font-semibold mb-2">Perguntas:</h3>
+
+          <div v-for="pergunta in produto.perguntas" :key="pergunta.id" class="bg-gray-700 p-2 rounded mb-2">
+            <p class="text-sm mb-1"><strong>Q:</strong> {{ pergunta.conteudo }}</p>
+
+            <input v-model="respostas[pergunta.id]" type="text" placeholder="Responder..." class="w-full px-2 py-1 rounded text-sm bg-gray-100 text-black focus:outline-none focus:ring-2 focus:ring-blue-500 mb-2"/>
+            <button @click="responder(pergunta.id)" class="bg-blue-600 hover:bg-blue-700 text-white text-sm px-3 py-1 rounded transition w-full">
+              Responder
+            </button>
+          </div>
         </div>
       </div>
     </div>
   </div>
 </template>
+
 
 <script setup>
 import { ref, onMounted } from 'vue'

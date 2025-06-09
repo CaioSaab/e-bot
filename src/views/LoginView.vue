@@ -9,20 +9,17 @@
         v-model="nome"
         type="text"
         placeholder="Usuário"
-        class="w-full px-4 py-2 mb-4 rounded bg-gray-700 text-white focus:outline-none"
-      />
+        class="w-full px-4 py-2 mb-4 rounded bg-gray-700 text-white focus:outline-none"/>
 
       <input
         v-model="senha"
         type="password"
         placeholder="Senha"
-        class="w-full px-4 py-2 mb-6 rounded bg-gray-700 text-white focus:outline-none"
-      />
+        class="w-full px-4 py-2 mb-6 rounded bg-gray-700 text-white focus:outline-none"/>
 
       <button
         @click="Authenticate"
-        class="w-full bg-blue-600 hover:bg-blue-700 text-white py-2 rounded"
-      >
+        class="w-full bg-blue-600 hover:bg-blue-700 text-white py-2 rounded">
         Entrar
       </button>
 
