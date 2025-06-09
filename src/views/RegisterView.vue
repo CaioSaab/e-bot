@@ -5,31 +5,13 @@
 
       <h1 class="text-2xl font-bold text-white mb-6 text-center">Cadastro</h1>
 
-      <input
-        v-model="nome"
-        type="text"
-        placeholder="Nome de usuário"
-        class="w-full px-4 py-2 mb-4 rounded bg-gray-700 text-white focus:outline-none"
-      />
+      <input v-model="nome" type="text" placeholder="Nome de usuário" class="w-full px-4 py-2 mb-4 rounded bg-gray-700 text-white focus:outline-none"/>
 
-      <input
-        v-model="email"
-        type="email"
-        placeholder="Email"
-        class="w-full px-4 py-2 mb-4 rounded bg-gray-700 text-white focus:outline-none"
-      />
+      <input v-model="email" type="email" placeholder="Email" class="w-full px-4 py-2 mb-4 rounded bg-gray-700 text-white focus:outline-none"/>
 
-      <input
-        v-model="senha"
-        type="password"
-        placeholder="Senha"
-        class="w-full px-4 py-2 mb-6 rounded bg-gray-700 text-white focus:outline-none"
-      />
+      <input v-model="senha" type="password" placeholder="Senha" class="w-full px-4 py-2 mb-6 rounded bg-gray-700 text-white focus:outline-none"/>
 
-      <button
-        @click="Register"
-        class="w-full bg-green-600 hover:bg-green-700 text-white py-2 rounded"
-      >
+      <button @click="Register" class="w-full bg-green-600 hover:bg-green-700 text-white py-2 rounded">
         Cadastrar
       </button>
 

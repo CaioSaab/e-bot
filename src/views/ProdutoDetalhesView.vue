@@ -5,14 +5,11 @@
       ← Voltar
     </button>
 
-    <!-- Estados de carregamento/erro -->
     <div v-if="loading" class="text-white">Carregando produto...</div>
     <div v-else-if="erro" class="text-red-500">{{ erro }}</div>
 
-    <!-- Produto carregado -->
     <div v-else-if="produto" class="bg-gray-800 p-6 rounded-lg shadow-xl">
       
-      <!-- Imagem + informações lado a lado -->
       <div class="flex flex-col md:flex-row gap-10 mb-10">
         <!-- Imagem -->
         <div class="w-[300px] h-[300px] rounded-lg overflow-hidden shadow-md mx-auto md:mx-0">
@@ -27,14 +24,11 @@
         </div>
       </div>
 
-      <!-- Perguntas feitas -->
+      <!-- Perguntas -->
       <section class="mb-10">
         <div class="flex items-center justify-between mb-4">
           <h2 class="text-2xl font-semibold">Perguntas sobre o produto</h2>
-          <button
-            @click="togglePerguntas"
-            class="text-sm bg-blue-600 hover:bg-blue-700 text-white rounded px-3 py-1 transition"
-          >
+          <button @click="togglePerguntas" class="text-sm bg-blue-600 hover:bg-blue-700 text-white rounded px-3 py-1 transition">
             {{ perguntasMinimizadas ? 'Mostrar perguntas' : 'Minimizar perguntas' }}
           </button>
         </div>
@@ -45,11 +39,7 @@
           </div>
 
           <ul class="space-y-4">
-            <li
-              v-for="p in perguntas"
-              :key="p.id"
-              class="bg-gray-700 p-4 rounded-lg shadow-sm"
-            >
+            <li v-for="p in perguntas" :key="p.id" class="bg-gray-700 p-4 rounded-lg shadow-sm">
               <p class="font-semibold">Q: {{ p.conteudo }}</p>
               <p v-if="p.resposta" class="text-green-400 mt-2">R: {{ p.resposta.conteudo }}</p>
             </li>
@@ -59,30 +49,17 @@
 
       <!-- Campo para fazer pergunta -->
       <section class="bg-gray-700 p-6 rounded-lg shadow-md">
-  <h3 class="text-xl font-semibold mb-4 text-white">📩 Faça uma pergunta</h3>
-
-  <div class="space-y-4">
-    <textarea
-      v-model="novaPergunta"
-      rows="4"
-      placeholder="Digite sua pergunta aqui..."
-      class="w-full p-4 rounded-lg bg-gray-800 text-white border border-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500 resize-none placeholder-gray-400"
-    ></textarea>
-
-    <div class="flex justify-end">
-      <button
-        @click="enviarPergunta"
-        :disabled="enviando || novaPergunta.trim() === ''"
-        class="px-6 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg disabled:opacity-50 font-medium transition-all duration-200"
-      >
-        {{ enviando ? 'Enviando...' : 'Enviar Pergunta' }}
-      </button>
+        <h3 class="text-xl font-semibold mb-4 text-white">📩 Faça uma pergunta</h3>
+        <div class="space-y-4">
+          <textarea v-model="novaPergunta" rows="4" placeholder="Digite sua pergunta aqui..." class="w-full p-4 rounded-lg bg-gray-800 text-white border border-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500 resize-none placeholder-gray-400"></textarea>
+          <div class="flex justify-end">
+            <button @click="enviarPergunta" :disabled="enviando || novaPergunta.trim() === ''" class="px-6 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg disabled:opacity-50 font-medium transition-all duration-200">
+            {{ enviando ? 'Enviando...' : 'Enviar Pergunta' }}
+            </button>
+          </div>
+        </div>
+      </section>
     </div>
-  </div>
-</section>
-
-    </div>
-
     <div v-else class="text-white">Produto não encontrado.</div>
   </div>
 </template>

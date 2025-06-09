@@ -5,21 +5,11 @@
 
       <h1 class="text-2xl font-bold text-white mb-6 text-center">Login</h1>
 
-      <input
-        v-model="nome"
-        type="text"
-        placeholder="Usuário"
-        class="w-full px-4 py-2 mb-4 rounded bg-gray-700 text-white focus:outline-none"/>
+      <input v-model="nome" type="text" placeholder="Usuário" class="w-full px-4 py-2 mb-4 rounded bg-gray-700 text-white focus:outline-none"/>
 
-      <input
-        v-model="senha"
-        type="password"
-        placeholder="Senha"
-        class="w-full px-4 py-2 mb-6 rounded bg-gray-700 text-white focus:outline-none"/>
+      <input v-model="senha" type="password" placeholder="Senha" class="w-full px-4 py-2 mb-6 rounded bg-gray-700 text-white focus:outline-none"/>
 
-      <button
-        @click="Authenticate"
-        class="w-full bg-blue-600 hover:bg-blue-700 text-white py-2 rounded">
+      <button @click="Authenticate" class="w-full bg-blue-600 hover:bg-blue-700 text-white py-2 rounded">
         Entrar
       </button>
 
